@@ -16,7 +16,7 @@ async function run() {
       await client.connect();
       const database = client.db("deliveryFood");
       const servicesCollection = database.collection("services");
-     console.log('hitting the sever')
+     console.log('hitting the sever well')
      app.get('/services',async(req,res)=>{
          const cursor =servicesCollection.find({});
          const services =await cursor.toArray();
