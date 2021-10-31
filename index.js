@@ -32,6 +32,14 @@ async function run() {
         res.json(myorders);
     });
 
+    // DeleteApi
+    app.delete('/myorders:id',async(req,res)=>{
+        const id =req.params.id;
+        const query ={_id:ObjectId(id)}
+        const result = await ordersCollections.deleteOne(query)
+        res.json(result); 
+    })
+
     //  post api
 
     app.post('/myorders',async(req,res)=>{
