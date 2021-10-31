@@ -38,6 +38,23 @@ async function run() {
           const orders =await ordersCollections.findOne(query);
           res.json(orders)
      })
+     app.put('/myorders/:id',async(req,res)=>{
+         const id =res.params.id;
+         const updatestatus= req.body;
+         const filter = {_id:ObjectId(id)}
+         const options = {upsert:true}
+         const updateDoc = {
+            $set:{
+                status:`Approved`
+
+            }
+
+        };
+        const result = await ordersCollections.updateOne(filter, updateDoc, options)
+        console.log("updating user",req);
+        res.json(result)
+
+     })
 
     // DeleteApi
     app.delete('/myorders/:id',async(req,res)=>{
