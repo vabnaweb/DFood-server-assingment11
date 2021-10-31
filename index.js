@@ -1,5 +1,6 @@
 const  express = require('express');
 const { MongoClient } = require('mongodb');
+const ObjectId = require('mongodb').ObjectId
 require('dotenv').config()
 const cors =require('cors');
 const app= express();
@@ -16,15 +17,28 @@ async function run() {
       await client.connect();
       const database = client.db("deliveryFood");
       const servicesCollection = database.collection("services");
-     console.log('hitting the sever well  bbb')
+      const ordersCollections = database.collection("myorders")
+     console.log('hitting the sever well')
      app.get('/services',async(req,res)=>{
          const cursor =servicesCollection.find({});
          const services =await cursor.toArray();
          res.send(services);
      });
+
+    //  post api
+
+    app.post('/myorders',async(req,res)=>{
+        const order = req.body;
+        console.log('hit the post api',order)
+        res.send('post hitted')
+        const result= await ordersCollections.insertOne(order);
+        console.log(result)
+        res.json(result)
       
       
-    } finally {
+    })
+}
+     finally {
     //   await client.close();
     }
   }
