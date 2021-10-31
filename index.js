@@ -39,7 +39,7 @@ async function run() {
           res.json(orders)
      })
      app.put('/myorders/:id',async(req,res)=>{
-         const id =res.params.id;
+         const id =req.params.id;
          const updatestatus= req.body;
          const filter = {_id:ObjectId(id)}
          const options = {upsert:true}
