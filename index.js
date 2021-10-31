@@ -25,6 +25,13 @@ async function run() {
          res.send(services);
      });
 
+    //  Api Get
+    app.get('/myorders',async(req,res)=>{
+        const cursor = ordersCollections.find({});
+        const myorders = await cursor.toArray()
+        res.json(myorders);
+    });
+
     //  post api
 
     app.post('/myorders',async(req,res)=>{
