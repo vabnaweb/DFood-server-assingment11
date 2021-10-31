@@ -32,8 +32,15 @@ async function run() {
         res.json(myorders);
     });
 
+     app.get('/myorders/:id',async(req,res)=>{
+         const id =req.params.id;
+         const query ={_id:ObjectId(id)};
+          const orders =await ordersCollections.findOne(query);
+          res.json(orders)
+     })
+
     // DeleteApi
-    app.delete('/myorders:id',async(req,res)=>{
+    app.delete('/myorders/:id',async(req,res)=>{
         const id =req.params.id;
         const query ={_id:ObjectId(id)}
         const result = await ordersCollections.deleteOne(query)
