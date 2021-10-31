@@ -49,6 +49,16 @@ async function run() {
 
     //  post api
 
+    app.post('/services',async(req,res)=>{
+        const service = req.body;
+        console.log('hitting the post api',service)
+        
+        const result = await servicesCollection.insertOne(service);
+        console.log(result)
+        res.json(result)
+
+    })
+
     app.post('/myorders',async(req,res)=>{
         const order = req.body;
         console.log('hit the post api',order)
